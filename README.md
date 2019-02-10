@@ -1,14 +1,22 @@
 # Blog-with-node.js
 Self-made blog with node.js and mongodb
+
 It's my first time developing a website from front-end to back-end.
-I wanted to have my own blog that has no platform for tech posts, making it by myself.
+
+I wanted to have my own blog that has no platform for tech posts, making it 
+by myself.
+
 This blog supports
  - basic post write, edit, delete, search
  - simple parent-children hierarchical category structure
  - tagging
  - responsive layout
+
 Willingly appreciate feedbacks about codes and everything about project.
-I am a newbie developer and ignorant of copyright issues. If my project violates somewhat copyright, please write issue.
+
+I am a newbie developer and ignorant of copyright issues. If my project 
+
+violates somewhat copyright, please write issue.
 
 # package.json
 ```
@@ -37,19 +45,28 @@ I am a newbie developer and ignorant of copyright issues. If my project violates
 
 # Description
 All npm modules are install by **npm install --save modulename**
+
 Server made by nodejs express, basic settings are in **app.js**
+
 Database uses MongoDB, and npm mongoose.
+
 Template engine uses npm Pug.
 
 models: mongoose schema templates
+
 public: static files(imgs, css, js..)
+
 routes: express router modules
+
 view: webpage templates written in Pug
 
 # How to use
 It needs Node.js and MongoDB.
+
 No admin page yet, so to make a new category, you should execute MongoDB queries in terminal.
+
 When making new categories, please refer to category.js in models folder.
+
 There are three types of categories possible.
  - Independant category: no children, able to write posts in. give is_parent: true, and is_end: true
  - Parent category: multiple children, not able to write in. give is_parent: true, and is_end: false
