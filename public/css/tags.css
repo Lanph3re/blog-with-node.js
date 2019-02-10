@@ -1,0 +1,29 @@
+/*
+ * ----------------------------------
+ * css used for tags page
+ * ----------------------------------
+ */
+
+#Box {
+  width: 100%;
+  height: 40px;
+}
+
+span img.item {
+  float: left;
+  margin: 4px 5px;
+}
+
+span div.item {
+  line-height: 40px;
+}
+
+#tagCloud {
+  width: 80%;
+  height: 500px;
+  margin: 1% auto;
+}
+
+#tagCloud a {
+  margin: 0 1px 0 1px;
+}

@@ -1,0 +1,74 @@
+extends layout.pug
+
+block CSSs
+  link(rel="stylesheet" href="/static/css/toastr.css")
+  link(rel="stylesheet" href="/static/css/jquery-ui.css")
+  link(rel="stylesheet", href="/static/css/tag-basic-style.css")
+  link(rel="stylesheet", href="/static/bootstrap-3.3.2-dist/css/bootstrap.css")
+  link(rel="stylesheet" href="/static/summernote/summernote.css")
+  link(rel="stylesheet" href="/static/css/edit.css")
+block SCRIPTs
+  script(src="/static/js/toastr.min.js")
+  script(src="/static/js/jquery-ui.js")
+  script(src="/static/js/tagging.min.js")
+  script(src="/static/bootstrap-3.3.2-dist/js/bootstrap.js")
+  script(src="/static/summernote/summernote.js")
+  script(src="/static/js/edit.js")
+block content
+  #main_content
+    form#editAction(action="/posts?mode=edit" method="post")
+      #post_info
+        input#post_id(name="post_id" type="hidden" value=post._id)
+        input#post_category_before(name="post_category_before" type="hidden" value=post.category)
+        textarea#post_title(
+          name="post_title" 
+          cols="60"
+          rows="1"
+          placeholder="Title" 
+          style="vertical-align: top; resize: none; overflow: hidden;" 
+          maxlength=28
+          onkeypress="if(event.keyCode==13){return false;}"
+        )=post.title
+        #post_in in
+        select#post_category(name="post_category")
+          option(value="no_category")
+          each category in parent_categories
+            if category.is_end == true
+              if category.name == post.category
+                option(value=category.name selected)=category.name
+              else
+                option(value=category.name)=category.name
+            else
+              each child in category.children
+                if child.name == post.category
+                  option(value=child.name selected)=child.name
+                else
+                  option(value=child.name)=child.name            
+      textarea#post_contents(name="post_contents")!=post.contents
+      script.
+        $('#post_contents').summernote({
+          placeholder: '내용을 작성해주세요.',
+          minHeight: 500
+        });
+        $('.note-editable').css('font-size','15px');
+      #post_tags(data-tags-input-name="tag" name="post_tags")
+      script.
+        // tagging setting
+        let t, $tag_box;
+        let custom_options = {
+          'tags-limit': 7,
+          'forbidden-chars-callback': toastr.error,
+          'no-duplicate-callback': toastr.error
+        };
+        t =$('#post_tags').tagging(custom_options);
+        $tag_box = t[0];
+      each tag in post.tags
+        script.
+          $tag_box.tagging('add', '#{tag}');
+    #dialog(title="사이트에서 나가시겠습니까?") 변경사항이 저장되지 않을 수 있습니다.
+    #edit_post_bar
+      #edit_post_menuBox
+        a(onclick="submitContents();")
+          .edit_post_menu 확인
+        a(onclick="cancelWriteForm();")
+          .edit_post_menu 취소

@@ -1,0 +1,45 @@
+extends layout.pug
+
+block CSSs
+  link(rel="stylesheet" href="/static/css/jquery-ui.css")
+  link(rel="stylesheet", href="/static/bootstrap-3.3.2-dist/css/bootstrap.css")
+  link(href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet")
+  link(rel="stylesheet", href="/static/highlight.js/styles/atom-one-dark.css")
+  link(rel="stylesheet" href="/static/css/viewPost.css")
+block SCRIPTs
+  script(src="/static/js/jquery-ui.js")
+  script(src="/static/highlight.js/highlight.pack.js")
+  script(src="/static/js/viewPost.js")
+  <script>hljs.initHighlightingOnLoad();</script>
+block inHead
+  style.
+    * {
+      -webkit-box-sizing: initial;
+      -moz-box-sizing: initial;
+      box-sizing: initial;
+    }
+block content
+  #main_content
+    #in_post_info
+      #in_post_title
+        a(href="/posts/view?id="+post._id)=post.title
+      #in_post_subinfo
+        span#in_post_category
+          a(href="/posts/"+post.category)=post.category
+        span#in_post_date=moment(post.date).calendar()
+    #in_post_content!=post.contents
+    #in_post_tags
+      each tag in post.tags
+        a(href="/tags/"+tag)
+          span.tag # #{tag}
+    #in_post_bar
+      #in_post_menuBox
+        a(href="/posts/edit?id="+post._id)
+          .in_post_menu 수정
+        #dialog(title="글을 삭제하시겠습니까?") 삭제된 글은 복구할 수 없습니다.
+        a(onclick="deletePost();")
+          .in_post_menu 삭제
+        a(href="/posts/"+post.category)
+          .in_post_menu 목록
+
+

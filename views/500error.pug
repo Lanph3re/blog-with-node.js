@@ -1,0 +1,62 @@
+//- error page
+doctype html
+
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8")
+    title Page not found
+    style(type="text/css" media="screen").
+      body {
+        margin: 0;
+      }
+
+      #container {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      #box {
+        width: 30%;
+        margin: 10% auto 0 auto;
+      }
+
+      .pics {
+        width: 50%;
+        height: auto;
+        margin: 0 auto;
+      }
+
+      #menu {
+        width: 25%;
+        margin: 0 auto;
+      }
+
+      @media screen and (max-width: 1320px) {
+        #box {
+          width: 70%;
+          margin: 30% auto 0 auto;
+        }
+
+        .pics {
+          width: 50%;
+          height: auto;
+          margin: 0 auto;
+        }
+
+        #menu {
+          width: 55%;
+          margin: 0 auto;
+        }
+      }
+
+  body(oncontextmenu="return false" onselectstart="return false" ondragstart="return false")
+      #container
+        #box
+          img.pics(src="/static/imgs/error.png")
+          img.pics(src="/static/imgs/oops500.jpg")
+        #menu
+          a(href="/")
+            img(src="/static/imgs/home.png" style="width: 10%; height: auto; float: right;")
+
+
+  

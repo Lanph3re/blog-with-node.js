@@ -1,0 +1,21 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "feed": "^2.0.2",
+    "html2plaintext": "^2.1.2",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.10",
+    "pug": "^2.0.3"
+  }
+}

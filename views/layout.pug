@@ -1,0 +1,135 @@
+//- layout of Blog
+doctype html
+
+html
+  head
+    meta(name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8")
+    title In Progress
+    link(rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css")
+    link(rel="stylesheet" href="/static/css/layout.css")
+    script(src="/static/js/jquery-3.3.1.min.js")
+    block CSSs
+    script(src="/static/js/layout.js")
+    block SCRIPTs        
+    block inHead
+  body
+    #dark_background
+    #sidenav-menu
+      ul#side-menu
+        li#side-menu-palette
+          a(href="/rss")
+            img(src="/static/imgs/rss.png" style="float: right;")
+          a(href="/write")
+            img(src="/static/imgs/pencil.png" style="float: right;")
+        li#total.category
+          a(href="/" style="border-top: none;") Home
+        li#total.category
+          a(href="/about" style="border-top: none;") About
+        li#total.category
+          a(href="/tags" style="border-top: none;") Tags
+        //- calculate total number of posts
+        - let total_count = 0;
+        each category in parent_categories
+          - total_count = total_count + category.count
+        li#total.category
+          a(href="/posts" style="border-top: none;") 전체 글 보기 (#{total_count})
+        each category in parent_categories
+          li.category
+            a(href="/posts/"+category.name) #{category.name} (#{category.count})
+          each child in category.children
+            li.category
+              a.sub_category(href="/posts/"+child.name) ▷ #{child.name} (#{child.count})
+    header
+      a#mobile_search
+        img.item(src="/static/imgs/searchBox.png")
+      form#mobile_search_form(action="/search" method="get" autocomplete="off")
+        input#mb_search_input(name="q" type="text" maxlength=25)
+      #header_name_part
+        a(href="/") Blog name
+      a#mobile_menu
+        img.item(src="/static/imgs/menu.png")
+      
+      #header_nav_part
+        ul
+          li.navs
+            a(href="/") Home
+          li.navs
+            a(href="/about") About
+          li.navs
+            a(href="/tags") Tags
+          li.navs
+            a(href="/search")
+              img(src="/static/imgs/search.png")
+    #wrapper
+      section
+        block content
+      aside
+        #palette
+          //- img(src="/static/imgs/setting.png" style="float: right;")
+          //- img(src="/static/imgs/bookmark.png" style="float: right;")
+          a(href="/rss")
+            img(src="/static/imgs/rss.png" style="float: right;")
+          a(href="/write")
+            img(src="/static/imgs/pencil.png" style="float: right;")
+        ul#menu
+          li#total.category
+            a(href="/posts" style="border-top: none;") 전체 글 보기 (#{total_count})
+          each category in parent_categories
+            li.category
+              a(href="/posts/"+category.name) #{category.name} (#{category.count})
+            each child in category.children
+              li.category
+                a.sub_category(href="/posts/"+child.name) &nbsp;&nbsp;&nbsp;▷ #{child.name} (#{child.count})
+    footer
+        .footer_info_item Blog CopyRight
+
+    script.
+      function sidenav_open () {
+        $('#mobile_menu').addClass('open');
+        $('#dark_background').fadeIn();
+        $('#side-menu').addClass('open');
+        $('#sidenav-menu').css('right','0');
+      }
+      function sidenav_close () {
+        $('#mobile_menu').removeClass('open'); 
+        $('#dark_background').fadeOut();
+        $('#side-menu').removeClass('open');
+        $('#sidenav-menu').css('right','-200px');
+      }
+      function form_on () {
+        $('#mobile_search_form').addClass('on');
+        $('#header_name_part').addClass('open');
+        $('#mobile_menu').addClass('search_on');
+        $('#dark_background').addClass('search_on');
+        $('#dark_background').fadeIn();
+        $('#mb_search_input').focus();
+      }
+      function form_close () {
+        $('#mobile_search_form').removeClass('on');
+        $('#header_name_part').removeClass('open');
+        $('#mobile_menu').removeClass('search_on');
+        $('#dark_background').removeClass('search_on');
+        $('#dark_background').fadeOut();
+        document.activeElement.blur();
+      }
+      $('#mobile_menu').click((event) => {
+        event.stopPropagation();
+        if( $('#mobile_menu').hasClass('open') ) sidenav_close();
+        else sidenav_open();
+      });
+      $('#dark_background').click(sidenav_close);
+      $('#dark_background').click(form_close);
+      $(window).resize(() => {
+        let width = $(window).width();
+        if(width > 1320) {
+          sidenav_close();
+          form_close();
+        }
+      });
+      $('#mobile_search').click((event) => {
+        event.stopPropagation();
+        form_on();
+      });
+
+
+

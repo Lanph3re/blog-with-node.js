@@ -1,0 +1,17 @@
+extends layout.pug
+
+block CSSs
+  link(rel="stylesheet", href="/static/css/tags.css")
+block SCRIPTs
+  script(src="/static/js/jquery.tagcloud.js")
+  script(src="/static/js/tags.js")
+block content
+  #main_content
+    #Box
+      span
+        img.item(src="/static/imgs/tag.png" width=40)
+      span
+        .item(style="font-size: 23px !important; font-weight: bold; margin: 6.5px 0;") Tags
+    #tagCloud
+      each tag in tags_info
+        a(href="/tags/"+tag.name rel=tag.count)=tag.name

@@ -1,0 +1,53 @@
+extends layout.pug
+
+block CSSs
+  link(rel="stylesheet" href="/static/css/toastr.css")
+  link(rel="stylesheet" href="/static/css/jquery-ui.css")
+  link(rel="stylesheet" href="/static/css/tag-basic-style.css")
+  link(rel="stylesheet" href="/static/bootstrap-3.3.2-dist/css/bootstrap.css")
+  link(rel="stylesheet" href="/static/summernote/summernote.css")
+  link(rel="stylesheet" href="/static/css/write.css")
+block SCRIPTs    
+  script(src="/static/js/toastr.min.js")
+  script(src="/static/js/jquery-ui.js")
+  script(src="/static/js/tagging.min.js")
+  script(src="/static/bootstrap-3.3.2-dist/js/bootstrap.js")
+  script(src="/static/summernote/summernote.js")
+  script(src="/static/js/write.js")
+block content
+  #main_content
+    form#writeAction(action="/posts?mode=write" method="post")
+      #post_info
+        textarea#post_title(
+          name="post_title" 
+          cols="60"
+          rows="1"
+          placeholder="Title" 
+          style="vertical-align: top; resize: none; overflow: hidden;" 
+          maxlength=28
+          onkeypress="if(event.keyCode==13){return false;}"
+        )
+        #post_in in
+        select#post_category(name="post_category")
+          option(value="no_category")
+            each category in parent_categories
+              if category.is_end == true
+                option(value=category.name)=category.name
+              else
+                each child in category.children
+                  option(value=child.name)=child.name
+      textarea#post_contents(name="post_contents")
+      script.
+        $('#post_contents').summernote({
+          placeholder: '내용을 작성해주세요.',
+          minHeight: 500
+        });
+        $('.note-editable').css('font-size','15px');
+      #post_tags(data-tags-input-name="tag" name="post_tags")
+    #dialog(title="사이트에서 나가시겠습니까?") 변경사항이 저장되지 않을 수 있습니다.
+    #write_post_bar
+      #write_post_menuBox
+        a(onclick="submitContents();")
+          .write_post_menu 확인
+        a(onclick="cancelWriteForm();")
+          .write_post_menu 취소

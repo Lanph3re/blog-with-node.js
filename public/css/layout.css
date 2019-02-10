@@ -1,0 +1,426 @@
+/*
+ * ----------------------------------
+ * css for overall layout
+ * ----------------------------------
+ */
+
+* {
+  font-family: 'NanumSquare', 'hack', sans-serif;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #f3f0f0;
+}
+
+a {
+  text-decoration: none;
+}
+
+#wrapper {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1000px 320px 1fr;
+  overflow: auto;
+}
+
+header {
+  width: 100%;
+  background: #000000;
+  z-index: 9000;
+  display: grid;
+  grid-template-columns: 280px auto 320px;
+  overflow: hidden;
+  padding: 5px 0;
+}
+
+section {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  background: #ffffff;
+  min-height: 99vh;
+  margin: 0.5% 0;
+  padding: 2.5% 0;
+}
+
+aside {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  background: rgb(238, 235, 235);
+  border-left: solid .3px rgb(167, 165, 165);
+  min-height: 100%;
+}
+
+footer {
+  width: 100%;
+  height: 100px;
+  background: #000000;
+  z-index: 9999;
+}
+
+header a {
+  font-size: 17px !important;
+  text-decoration: none;
+  color: rgb(238, 238, 238);
+}
+
+header a:hover {
+  color: rgb(168, 162, 162);
+  text-decoration: none;
+}
+
+header.fixed {
+  position: fixed;
+  top: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.navs {
+  line-height: 48px;
+  float: left;
+  width: 70px;
+  height: 48px;
+  text-align: center;
+}
+
+.navs a:hover {
+  color: rgb(166, 164, 173);
+  text-decoration: none;
+}
+
+.navs a img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 9px 20px;
+}
+
+#menu {
+  width: 280px;
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0;
+  border-top: solid 1.5px black;
+  border-bottom: solid 1.5px black;
+}
+
+#palette {
+  width: 280px;
+  height: 30px;
+  margin-top: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0;
+}
+
+ul#menu li {
+  margin-top: 6px;
+  margin-bottom: 3px;
+}
+
+ul#menu li a {
+  font-size: 14px;
+  display: block;
+  width: 267px;
+  line-height: 20px;
+  margin-left: 5px;
+  text-decoration: none;
+  color: rgb(53, 50, 50);
+  /*
+   * border-top: solid 1px black;
+   */
+}
+
+ul#menu li a.sub_category {
+  color: rgb(77, 77, 77);
+}
+
+ul#menu li a:hover {
+  color: rgb(168, 162, 162);
+}
+
+ul#side-menu li#side-menu-palette {
+  height: 35px;
+}
+
+.category {
+  font-weight: bold;
+}
+
+.category_item {
+  color: rgb(77, 75, 75);
+}
+
+#header_name_part {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  padding: 4px 0;
+}
+
+a#mobile_menu {
+  display: none;
+}
+
+a#mobile_search {
+  display: none;
+}
+
+#header_nav_part {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  height: 48px;
+}
+
+#main_content {
+  width: 90%;
+  margin: 0.5% auto;
+}
+
+.footer_info_item {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  font-size: 14px;
+  color: rgb(184, 184, 184);
+  line-height: 13px;
+  padding-top: 23px;
+}
+
+#dark_background {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: rgba(0, 0, 0, .5);
+}
+
+#side-menu {
+  display: none;
+}
+
+#mobile_search_form {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  display: none;
+}
+
+/*
+ * for device whose width is less than 1320px
+ * this blog has only two responsive design
+ */
+@media screen and (max-width: 1320px) {
+  body {
+    background: #d3d3d3;
+  }
+
+  #wrapper {
+    display: block;
+    min-height: 100%;
+    overflow: auto;
+  }
+
+  header {
+    grid-template-columns: 67px auto 67px;
+    padding: 0;
+    background: #ffffff
+  }
+
+  section {
+    width: 99% !important;
+    margin: 0.3% auto;
+  }
+  
+  aside {
+    display: none !important;
+  }
+
+  footer {
+    background: #ffffff;
+  }
+
+  header a {
+    color: #3d3d3d;
+  }
+
+  #header_name_part {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-align: center;
+    width: 100%;
+    padding: 8.4px 0;
+  }
+
+  #header_name_part.open {
+    display: none;
+  }
+
+  a#mobile_menu {
+    margin-right: 15px;
+    display: inline-block;
+    height: 56.8px;
+  }
+
+  a#mobile_menu.search_on {
+    display: none;
+  }
+
+  a#mobile_search {
+    margin-left: 15px;
+    display: inline-block;
+    height: 56.8px;
+  }
+
+  img.item {
+    width: 32px;
+    height: 32px;
+    margin: 12.4px;
+    padding: 0 !important;
+  }
+  
+  #header_nav_part {
+    display: none;
+  }
+
+  #dark_background.search_on {
+    top: 56.8px;
+  }
+
+  #sidenav-menu {
+    z-index: 9999;
+    display: block;
+    position: fixed;
+    height: 100%;
+    width: 200px;
+    top: 0;
+    right: -200px;
+    background: #ffffff;
+    transition: 0.4s;
+  }
+
+  #side-menu {
+    padding: 10px 0 0 0;
+  }
+
+  #side-menu.open {
+    display: block;
+    transition: 0.4s;
+  }
+
+  ul#side-menu li {
+    width: 180px;
+    margin: 0 auto;
+    padding: 5px 0;
+    border-bottom: 1px solid #c8c8c8;
+  }
+  
+  ul#side-menu li a {
+    font-size: 14px !important;
+    display: block;
+    line-height: 20px;
+    margin-left: 20px;
+    text-decoration: none;
+    color: rgb(37, 37, 37);
+    /*
+     * border-top: solid 1px black;
+     */
+  }
+  
+  ul#side-menu li a.sub_category {
+    color: rgb(59, 59, 59);
+  }
+  
+  ul#side-menu li a:hover {
+    color: rgb(168, 162, 162);
+  }
+
+  .category {
+    font-weight: unset;
+  }
+
+  #mobile_search_form.on {
+    display: block;
+    margin: 8.5px 10px;
+  }
+
+  input {
+    width: 90%;
+    height: 23.8px;
+    outline: none;
+    margin: 4.5px 0;
+    padding: 2px 10px;
+    border: 1.5px solid #30373d;
+    border-radius: 15px;
+  }
+
+  .footer_info_item {
+    color: #404345;
+  }
+}
+
+/*
+ * for device whose width is less than 420px
+ * requried for better readability and fine design tunes
+ * change font-size
+ */
+@media screen and (max-width: 420px) {
+  header {
+    grid-template-columns: 58px auto 58px;
+  }
+  
+  a#mobile_menu {
+    margin-right: 5px;
+    height: 51.8px;
+  }
+
+  a#mobile_search {
+    margin-left: 5px;
+    height: 51.8px;
+  }
+
+  #header_name_part {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-align: center;
+    width: 100%;
+    padding: 5.9px 0;
+  }
+
+  img.item {
+    width: 20px;
+    height: 20px;
+    margin: 15.9px;
+    padding: 0 !important;
+  }
+
+  #dark_background.search_on {
+    top: 51.8px;
+  }
+
+  .footer_info_item {
+    font-size: 14px !important;
+  }
+
+  #mobile_search_form.on {
+    display: block;
+    margin: 6px 0px;
+  }
+
+  input {
+    height: 23.8px;
+    margin: 4.5px 0;
+    padding: 2px 10px;
+  }
+}
+

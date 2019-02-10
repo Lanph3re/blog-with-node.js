@@ -1,0 +1,232 @@
+/*
+ * ------------------------------------------
+ * list of posts in certain category
+ * ------------------------------------------
+ */
+
+.post {
+  position: relative;
+  width: 82%;
+  height: 156px;
+  margin: 0 auto;
+  border-bottom: solid 1px rgb(204, 204, 204);
+}
+
+.post_title {
+  font-size: 17px;
+  line-height: 20px;
+  width: 100%;
+  height: 20px;
+  margin: 7px auto;
+  color: black;
+}
+
+.post_contents {
+  font-size: 14px;
+  width: 100%;
+  height: 100px;
+  margin: 1.5px auto;
+}
+
+.post_contents_text {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-wrap: break-word;
+
+  line-height: 1.4;
+  width: 75%;
+  height: 100%;
+  float: left;
+  color: #5c5c5c;
+}
+
+.post_contents_thumbnail {
+  position: absolute;
+  margin: 20px;
+  width: 118px;
+  height:118px;
+  top: 0;
+  right: 0;
+  overflow: hidden !important;
+}
+
+.post_contents_thumbnail img {
+  border: 1px solid #e0e0e0;
+  position: absolute;
+  width: 97% !important;
+  height: auto;
+  min-height: 98%;
+  max-height: 98%;
+}
+
+.post_subinfo {
+  width: 100%;
+  height: 20px;
+  margin: 0 auto;
+}
+
+.post_category {
+  font-size: 13px;
+  line-height: 20px;
+  float: left;
+  height: 20px;
+}
+
+.post_category a {
+  color: rgb(22, 98, 199);
+}
+
+.post_title_date {
+  font-size: 13px;
+  line-height: 20px;
+  float: left;
+  height: 20px;
+  padding-left: 5px;
+  color: rgb(179, 179, 179);
+}
+
+/* div that contains category name */
+#board_name {
+  font-size: 20px;
+  width: 82%;
+  line-height: 40px;
+  height: 44px;
+  margin: 0 auto;
+  border-bottom: solid 1px rgb(204, 204, 204);
+}
+
+#board_name #category_name {
+  font-size: 17px;
+  text-decoration: none;
+  color: rgb(53, 53, 53);
+  background: #f1f1f1;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 3px 6px;
+}
+
+#page_nums {
+  float: right;
+}
+
+#page_nums a.cur_page {
+  color: #24292e;
+}
+
+#page_nums a.other_pages {
+  color: #aaaaaa;
+}
+
+span.page_num {
+  margin: 0 3px;
+}
+
+/*
+ * for device whose width is less than 1320px
+ * this blog has only two responsive design
+ */
+@media screen and (max-width: 1320px) {
+  #board_name {
+    line-height: 29px;
+    width: 85%;
+    height: 33px;
+  }
+
+  .post {
+    width: 85%;
+    height: 135px;
+  }
+
+  .post_title {
+    font-size: 15px;
+  }
+
+  .post_contents {
+    font-size: 15px;
+    height: 5.1em;
+  }
+  
+  .post_contents_text {
+    height: 5.6em;
+    line-height: 1.4;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    font-size: 0.9em !important;
+  }
+
+  .post_contents_thumbnail {
+    margin: 10.5px;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .post_subinfo {
+    height: 10px;
+  }
+
+  .post_category a {
+    font-size: 14px !important;
+  }
+  
+  .post_title_date {
+    font-size: 14px !important;
+  }
+}
+
+/*
+ * for device whose width is less than 420px
+ * requried for better readability and fine design tunes
+ */
+@media screen and (max-width: 420px) {
+  #board_name {
+    width: 95%;
+    height: 30px;
+    line-height: 26px;
+  }
+
+  #board_name #category_name {
+    font-size: 15px;
+  }
+
+  .post {
+    width: 95%;
+    height: 95px;
+  }
+
+  .post_title {
+    font-size: 16px !important;
+  }
+
+  .post_contents {
+    height: 2.5em;
+    margin: 5px 0;
+  }
+  
+  .post_contents_text {
+    height: 2.5em;
+    line-height: 1.3;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 1em !important;
+  }
+
+  .post_contents_thumbnail {
+    margin: 15px;
+    width: 54px;
+    height: 54px;
+  }
+  
+  .post_subinfo {
+    height: 10px;
+  }
+
+  .post_category a {
+    font-size: 12px !important;
+  }
+  
+  .post_title_date {
+    font-size: 12px !important;
+  }
+}
