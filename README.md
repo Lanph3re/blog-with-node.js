@@ -7,16 +7,16 @@ I wanted to have my own blog that has no platform for tech posts, making it
 by myself.
 
 This blog supports
- - basic post write, edit, delete, search
- - simple parent-children hierarchical category structure
- - tagging
- - responsive layout
+ - Basic post write, edit, delete, search
+ - Simple parent-children hierarchical category structure
+ - Tagging
+ - Responsive layout
 
 Willingly appreciate feedbacks about codes and everything about project.
 
-I am a newbie developer and ignorant of copyright issues. If my project 
+I am a newbie developer and ignorant of copyright issues.
 
-violates somewhat copyright, please write issue.
+If my project violates somewhat copyright, please write issue.
 
 # package.json
 ```
@@ -48,17 +48,15 @@ All npm modules are install by **npm install --save modulename**
 
 Server made by nodejs express, basic settings are in **app.js**
 
-Database uses MongoDB, and npm mongoose.
+Database uses **MongoDB**, and npm **mongoose**.
 
-Template engine uses npm Pug.
+Template engine uses npm **Pug**.
 
-models: mongoose schema templates
-
-public: static files(imgs, css, js..)
-
-routes: express router modules
-
-view: webpage templates written in Pug
+### Subfolders
+- models: mongoose schema templates
+- public: static files(imgs, css, js..)
+- routes: express router modules
+- view: webpage templates written in Pug
 
 # How to use
 It needs Node.js and MongoDB.
