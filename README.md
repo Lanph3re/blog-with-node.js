@@ -1,9 +1,9 @@
 # Blog-with-node.js
-Self-made blog with node.js and mongodb
+> Self-made blog with node.js and mongoDB
 
-It's my first time developing a website from front-end to back-end.
+> It's my first time developing a website from front-end to back-end.
 
-I wanted to have my own blog that has no platform for tech posts, making it 
+> I wanted to have my own blog that has no platform for tech posts, making it 
 by myself.
 
 This blog supports
@@ -46,9 +46,9 @@ If my project violates somewhat copyright, please write issue.
 # Description
 All npm modules are install by **npm install --save modulename**
 
-Server made by nodejs express, basic settings are in **app.js**
+Server made by Node.js express, basic settings are in **app.js**
 
-Database uses **MongoDB**, and npm **mongoose**.
+Database uses **MongoDB**, and npm **Mongoose**.
 
 Template engine uses npm **Pug**.
 
@@ -58,10 +58,10 @@ Template engine uses npm **Pug**.
 - routes: express router modules
 - view: webpage templates written in Pug
 
-# How to use
-It needs Node.js and MongoDB.
+# Installation(Develop)
+It just needs Node.js and MongoDB.
 
-No admin page yet, so to make a new category, you should execute MongoDB queries in terminal.
+No admin page yet, so to make a new category, you should mannually execute MongoDB queries in terminal.
 
 When making new categories, please refer to category.js in models folder.
 
