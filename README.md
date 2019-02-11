@@ -1,8 +1,6 @@
 # Blog-with-node.js
-> Self-made blog with node.js and mongoDB
-
-> It's my first time developing a website from front-end to back-end.
-
+> Self-made blog with node.js and mongoDB  
+> It's my first time developing a website from front-end to back-end.  
 > I wanted to have my own blog that has no platform for tech posts, making it 
 by myself.
 
