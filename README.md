@@ -75,3 +75,8 @@ There are three types of categories possible.
  - Responsive layout
  ### 19.02.12
  - Login page added (not working)
+ ### 19.02.13
+ - Login feature updated
+ - Login page design updated
+ - Only admin can write, edit, and delete posts
+ - Subtle design adjustments

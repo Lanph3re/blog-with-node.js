@@ -43,7 +43,7 @@ section {
   grid-column-end: 3;
   background: #ffffff;
   min-height: 99vh;
-  margin: 0.5% 0;
+  margin: 2px 0;
   padding: 2.5% 0;
 }
 
@@ -184,7 +184,7 @@ a#mobile_search {
 
 #main_content {
   width: 90%;
-  margin: 0.5% auto;
+  margin: 10px auto;
 }
 
 .footer_info_item {

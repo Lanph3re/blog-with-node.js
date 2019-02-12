@@ -34,12 +34,15 @@ block content
           span.tag # #{tag}
     #in_post_bar
       #in_post_menuBox
-        a(href="/posts/edit?id="+post._id)
-          .in_post_menu 수정
-        #dialog(title="글을 삭제하시겠습니까?") 삭제된 글은 복구할 수 없습니다.
-        a(onclick="deletePost();")
-          .in_post_menu 삭제
         a(href="/posts/"+post.category)
           .in_post_menu 목록
+        if(session)
+          #dialog(title="글을 삭제하시겠습니까?") 삭제된 글은 복구할 수 없습니다.
+          a(onclick="deletePost();")
+            .in_post_menu 삭제
+          a(href="/posts/edit?id="+post._id)
+            .in_post_menu 수정
+          
+        
 
 

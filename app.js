@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const expressSession = require('express-session');
 const router_main = require(__dirname + '/routes/index');
 const router_posts = require(__dirname + '/routes/posts');
 // -----------------------------------------------------------
@@ -10,10 +11,19 @@ let con = mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: 
 const app = express();
 
 global.__dir = __dirname;
+global.ADMIN_ID = 'admin';
+global.ADMIN_PASSWD = 'admin';
 
 // body-parser settings
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// express-session settings
+app.use(expressSession({
+  secret: 'admin',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // pug template engine settings
 app.set('view engine', 'pug');
@@ -21,7 +31,7 @@ app.set('views', './views');
 app.locals.pretty = true;
 
 // static file settings
-app.use('/static', express.static(path.resolve(__dirname, './public'))); 
+app.use('/static', express.static(path.resolve(__dirname, './public')));
 
 // router settigns
 app.use('/', router_main);

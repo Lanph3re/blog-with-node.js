@@ -106,7 +106,8 @@ router.get("/view", (req, res) => {
       res.render("viewPost", {
         parent_categories: page_info[0],
         post: page_info[1],
-        moment: moment
+        moment: moment,
+        session: req.session.user
       });
     })
     .catch((err) => {
@@ -379,87 +380,95 @@ router.post("/", (req, res) => {
 
 // To delete a post
 router.get("/delete", (req, res) => {
-  if (req.query.id) {
-    posts.findOneAndDelete(
-      {
-        _id: req.query.id
-      },
-      (err, dPost) => {
-        if (err) throw err;
+  if (req.session.user) {
+    if (req.query.id) {
+      posts.findOneAndDelete(
+        {
+          _id: req.query.id
+        },
+        (err, dPost) => {
+          if (err) throw err;
 
-        /*
-         * dPost: deleted Post
-         * posts number of category that the deleted post was in is decremented by 1
-         * if there is parent category, update as well
-         */
+          /*
+           * dPost: deleted Post
+           * posts number of category that the deleted post was in is decremented by 1
+           * if there is parent category, update as well
+           */
 
-        categories.findOneAndUpdate(
-          {
-            name: dPost.category
-          },
-          { $inc: { count: -1 } },
-          (err, uCategory) => {
-            if (err) throw err;
+          categories.findOneAndUpdate(
+            {
+              name: dPost.category
+            },
+            { $inc: { count: -1 } },
+            (err, uCategory) => {
+              if (err) throw err;
 
-            // uCategory: updated Category
-            categories.updateOne(
-              {
-                children: uCategory._id
-              },
-              { $inc: { count: -1 } },
-              (err) => {
-                if (err) throw err;
-                pt_matches.deleteMany(
-                  {
-                    post_id: dPost._id
-                  },
-                  (err) => {
-                    if (err) throw err;
-                    // redirect to category the deleted post was in
-                    res.redirect("/posts/" + uCategory.name);
-                  });
-              });
-          });
-      });
+              // uCategory: updated Category
+              categories.updateOne(
+                {
+                  children: uCategory._id
+                },
+                { $inc: { count: -1 } },
+                (err) => {
+                  if (err) throw err;
+                  pt_matches.deleteMany(
+                    {
+                      post_id: dPost._id
+                    },
+                    (err) => {
+                      if (err) throw err;
+                      // redirect to category the deleted post was in
+                      res.redirect("/posts/" + uCategory.name);
+                    });
+                });
+            });
+        });
+    } else {
+      throw err;
+    }
   } else {
-    throw err;
+    res.redirect('/login');
   }
 });
 
 // To edit a post
 router.get("/edit", (req, res) => {
-  if (req.query.id) {
-    let category_load = new Promise((resolve) => {
-      categories
-        .find({ $where: 'this.is_parent == true' })
-        .populate('children')
-        .exec((err, parent_categories) => {
-          if (err) reject(err);
-          resolve(parent_categories);
-        });
-    });
-
-    let post_load = new Promise((resolve) => {
-      posts.findOne(
-        {
-          _id: req.query.id
-        },
-        (err, post) => {
-          if (err) reject(err);
-          resolve(post);
-        });
-    });
-
-    Promise
-      .all([category_load, post_load])
-      .then((page_info) => {
-        res.render("edit", {
-          parent_categories: page_info[0],
-          post: page_info[1]
-        });
+  if (req.session.user) {
+    if (req.query.id) {
+      let category_load = new Promise((resolve) => {
+        categories
+          .find({ $where: 'this.is_parent == true' })
+          .populate('children')
+          .exec((err, parent_categories) => {
+            if (err) reject(err);
+            resolve(parent_categories);
+          });
       });
+  
+      let post_load = new Promise((resolve) => {
+        posts.findOne(
+          {
+            _id: req.query.id
+          },
+          (err, post) => {
+            if (err) reject(err);
+            resolve(post);
+          });
+      });
+  
+      Promise
+        .all([category_load, post_load])
+        .then((page_info) => {
+          res.render("edit", {
+            parent_categories: page_info[0],
+            post: page_info[1]
+          });
+        });
+    } else {
+      throw err;
+    }
   } else {
-    throw err;
+    res.redirect('/login');
   }
 });
 

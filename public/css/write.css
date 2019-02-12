@@ -98,23 +98,22 @@ blockquote {
     width: 100%;
     height: 30px;
     margin-bottom: 10px;
-    padding-top: 10px;
   }
 
   textarea#post_title {
-    line-height: 10px;
+    line-height: 30px;
     width: 50%;
-    height: 20px;
+    height: 30px;
+    font-size: 18px;
   }
 
   #post_in {
-    line-height: 20px;
-    height: 20px;
-    padding-bottom: 3px;
+    line-height: 30px;
+    height: 30px;
   }
   
   select#post_category {
-    height: 20px;
-    line-height: 20px;
+    height: 30px;
+    line-height: 30px;
   }
 }

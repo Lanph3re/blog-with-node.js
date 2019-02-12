@@ -92,29 +92,29 @@ blockquote {
  * for device whose width is less than 600px
  * requried for better readability and fine design tunes
  */
-@media screen and (max-width: 600px) {
+ @media screen and (max-width: 600px) {
   #post_info {
     width: 100%;
     height: 30px;
     margin-bottom: 10px;
-    padding-top: 10px;
   }
 
   textarea#post_title {
-    line-height: 10px;
+    line-height: 30px;
     width: 50%;
-    height: 20px;
+    height: 30px;
+    font-size: 18px;
   }
 
   #post_in {
-    line-height: 20px;
-    height: 20px;
-    padding-bottom: 3px;
+    line-height: 30px;
+    height: 30px;
   }
   
   select#post_category {
-    height: 20px;
-    line-height: 20px;
+    height: 30px;
+    line-height: 30px;
   }
 }
+
 

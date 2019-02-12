@@ -12,7 +12,7 @@
 
 html, body {
   height: 100%;
-  background: #000000;
+  background: #202020;
 }
 
 body {
@@ -25,7 +25,7 @@ a {
 
 #wrapper {
   display: grid;
-  grid-template-rows: 1fr 350px 1fr;
+  grid-template-rows: 1fr 285px 1fr;
   grid-template-columns: 1fr 320px 1fr;
   height: 100vh;
 }
@@ -36,9 +36,9 @@ form {
   grid-row-end: 3;
   grid-column-start: 2;
   grid-column-end: 3;
-  background: #ffffff;
+  background: #000000;
   border-radius: 10px;
-  border: 2px solid #24292e;
+  border: none;
 }
 
 #form-body {
@@ -46,21 +46,34 @@ form {
 }
 
 label {
+  color: #8f8f8f;
   display: block;
   width: 278px;
   margin: 0 auto;
   margin-bottom: 7px;
 }
 
-input {
-  display: block;
-  width: 258px;
-  min-height: 24px;
-  padding: 10px;
-  margin: 0 auto;
-  margin-bottom: 10px;
+#field {
+  background: #ffffff;
   border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, .125);
+  height: 48px;
+  margin-bottom: 10px;
+}
+
+img.icon {
+  margin: 11px;
+  width: 26px;
+  height: 26px;
+}
+
+input {
+  float: right;
+  display: block;
+  width: 232px;
+  min-height: 28px;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
   font-family: sans-serif;
 }
 
@@ -77,23 +90,25 @@ input {
 
 #box.top-title {
   border: none;
+  font-size: 20px;
   margin-top: 10px;
+  color: #ffffff;
 }
 
-#box.alert {
-  border: none;
-  color: #eb1010;
+span.alert {
+  color: #a51f1f;
   display: none;
   font-size: 14px;
-  width: 278px;
-  height: 10px;
+  margin: 0 auto;
   line-height: 10px;
-  text-align: unset;
+  text-align: center;
   padding: 0;
   padding-bottom: 20px;
 }
 
 #box.button {
-  background: #0e80e4;
+  background: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 20px;
   color: #ffffff;
 }

@@ -3,9 +3,9 @@ function signIn() {
   let passwd = $('#passwd').val();
 
   if (id == '' || passwd == '') {
-    $('#box.alert').fadeIn();
+    $('span.alert').fadeIn();
     return;
   }
 
-  $('#Sign').submit();
+  $('#sign').submit();
 }

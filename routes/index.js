@@ -30,8 +30,38 @@ router.get('/about', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  res.render('login');
+  if (req.session.user) {
+    res.redirect('/');
+  } else {
+    res.render('login');
+  }
 });
+
+router.post('/login', (req, res) => {
+  let id = req.body.id;
+  let passwd = req.body.passwd;
+
+  if (id == ADMIN_ID && passwd == ADMIN_PASSWD) {
+    req.session.user = {
+      'name': 'admin',
+    }
+    res.redirect('/');
+  } else {
+    res.redirect('/login');
+  }
+});
+
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+      res.clearCookie('connect.sid');
+      res.render('500error');
+    } else {
+      res.redirect('/');
+    }
+  });
+})
 
 router.get('/tags', (req, res) => {
   let category_load = new Promise((resolve) => {
@@ -223,13 +253,18 @@ router.get('/search', (req, res) => {
 });
 
 router.get('/write', (req, res) => {
-  categories
-    .find({ $where: 'this.is_parent == true' })
-    .populate('children')
-    .exec((err, parent_categories) => {
-      if (err) throw err
-      res.render('write', { parent_categories: parent_categories });
-    });
+  if (req.session.user) {
+    categories
+      .find({ $where: 'this.is_parent == true' })
+      .populate('children')
+      .exec((err, parent_categories) => {
+        if (err) throw err
+        res.render('write', { parent_categories: parent_categories });
+      });
+  } else {
+    res.redirect('/login');
+  }
+
 });
 
 router.get('/rss', (req, res) => {
@@ -243,9 +278,9 @@ router.get('/rss', (req, res) => {
   posts
     .find({})
     .limit(10)
-    .sort({date: -1})
+    .sort({ date: -1 })
     .exec((err, posts) => {
-      if(err) throw err;
+      if (err) throw err;
       posts.forEach((post) => {
         feed.addItem({
           title: post.title,
@@ -258,7 +293,7 @@ router.get('/rss', (req, res) => {
       });
 
       fs.writeFile(__dir + '/rss.xml', feed.rss2(), 'utf8', (err) => {
-        if(err) throw err;
+        if (err) throw err;
         res.sendFile(__dir + '/rss.xml');
       });
     });

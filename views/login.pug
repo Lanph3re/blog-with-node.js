@@ -11,15 +11,15 @@ html
     script(src="/static/js/login.js")
   body
     #wrapper
-      form#Sign(action="/login" method="post")
-        #box.top-title(onlick="#")
-          h3 Please Sign in
+      form#sign(action="/login" method="post")
+        #box.top-title(onlick="#") Please Sign in
         #form-body
-          label(for="id") Id
-          input#id(type="text" placeholder="Id" maxlength="20")
-          label(for="passwd") Password
-          input#passwd(type="password" placeholder="Password" maxlength="20")
-        div(style="height: 10px; padding-bottom: 20px;")
-          #box.alert Incorrect id or password
-        a(onclick="signIn()")
+          #field
+            img.icon(src="/static/imgs/user.png")
+            input#id(name="id" type="text" placeholder="Id" maxlength="20" autocomplete="off" val="id")
+          #field
+            img.icon(src="/static/imgs/key.png")
+            input#passwd(name="passwd" type="password" placeholder="Password" maxlength="20" val="passwd")
+        span.alert Incorrect id or password
+        a(onclick="signIn()" style="cursor: pointer;")
           #box.button Sign in
