@@ -1,0 +1,99 @@
+/*
+ * ----------------------------------
+ * css for login page
+ * ----------------------------------
+ */
+
+ * {
+  font-family: 'NanumSquare', 'hack', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: #000000;
+}
+
+body {
+  display: grid;
+}
+
+a {
+  text-decoration: none;
+}
+
+#wrapper {
+  display: grid;
+  grid-template-rows: 1fr 350px 1fr;
+  grid-template-columns: 1fr 320px 1fr;
+  height: 100vh;
+}
+
+form {
+  display: block;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 2px solid #24292e;
+}
+
+#form-body {
+  padding: 10px;
+}
+
+label {
+  display: block;
+  width: 278px;
+  margin: 0 auto;
+  margin-bottom: 7px;
+}
+
+input {
+  display: block;
+  width: 258px;
+  min-height: 24px;
+  padding: 10px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, .125);
+  font-family: sans-serif;
+}
+
+#box {
+  line-height: 24px;
+  width: 256px;
+  height: 24px;
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 3px;
+  border: 1px solid rgba(14, 8, 8, 0.125);
+  text-align: center;
+}
+
+#box.top-title {
+  border: none;
+  margin-top: 10px;
+}
+
+#box.alert {
+  border: none;
+  color: #eb1010;
+  display: none;
+  font-size: 14px;
+  width: 278px;
+  height: 10px;
+  line-height: 10px;
+  text-align: unset;
+  padding: 0;
+  padding-bottom: 20px;
+}
+
+#box.button {
+  background: #0e80e4;
+  color: #ffffff;
+}

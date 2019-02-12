@@ -1,7 +1,12 @@
 # Blog-with-node.js
 > Self-made blog with node.js and mongoDB  
 > It's my first time developing a website from front-end to back-end.  
+<<<<<<< HEAD
 > I wanted to have my own blog that has no platform for tech posts, making it by myself.
+=======
+> I wanted to have my own blog that has no platform for tech posts, making it 
+by myself.
+>>>>>>> ed3e8a1f6dd78a6e386333ec14aa6eec52e15be4
 
 This blog supports
  - Basic post write, edit, delete, search
