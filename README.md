@@ -31,6 +31,7 @@ If my project violates somewhat copyright, please write issue.
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "feed": "^2.0.2",
     "html2plaintext": "^2.1.2",
     "moment": "^2.24.0",
