@@ -29,6 +29,10 @@ router.get('/about', (req, res) => {
     });
 });
 
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+
 router.get('/tags', (req, res) => {
   let category_load = new Promise((resolve) => {
     categories

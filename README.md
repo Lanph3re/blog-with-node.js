@@ -71,5 +71,7 @@ There are three types of categories possible.
  ### 19.02.10
  - Basic posts CRUD
  - Parent-Children Hierarchical category
- - tagging
- - responsive layout
+ - Tagging
+ - Responsive layout
+ ### 19.02.12
+ - Login page added (not working)
