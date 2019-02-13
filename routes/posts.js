@@ -427,6 +427,7 @@ router.get("/delete", (req, res) => {
       throw err;
     }
   } else {
+    req.session.returnURL = '/delete?id=' + req.query.id;
     res.redirect('/login');
   }
 });
@@ -468,6 +469,7 @@ router.get("/edit", (req, res) => {
       throw err;
     }
   } else {
+    req.session.returnURL = '/edit?id=' + req.query.id;
     res.redirect('/login');
   }
 });

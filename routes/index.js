@@ -45,7 +45,14 @@ router.post('/login', (req, res) => {
     req.session.user = {
       'name': 'admin',
     }
-    res.redirect('/');
+
+    if (req.session.returnURL) {
+      let returnURL = req.session.returnURL;
+      delete req.session.returnURL;
+      res.redirect(returnURL);
+    } else {
+      res.redirect('/');
+    }
   } else {
     res.redirect('/login');
   }
@@ -262,9 +269,9 @@ router.get('/write', (req, res) => {
         res.render('write', { parent_categories: parent_categories });
       });
   } else {
+    req.session.returnURL = '/write';
     res.redirect('/login');
   }
-
 });
 
 router.get('/rss', (req, res) => {
