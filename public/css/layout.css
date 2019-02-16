@@ -149,6 +149,7 @@ ul#menu li a:hover {
 
 ul#side-menu li#side-menu-palette {
   height: 35px;
+  padding-bottom: 10px;
 }
 
 .category {
@@ -185,6 +186,7 @@ a#mobile_search {
 #main_content {
   width: 90%;
   margin: 10px auto;
+  padding-bottom: 100px;
 }
 
 .footer_info_item {
@@ -321,7 +323,7 @@ a#mobile_search {
   ul#side-menu li {
     width: 180px;
     margin: 0 auto;
-    padding: 5px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #c8c8c8;
   }
   

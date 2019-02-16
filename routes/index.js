@@ -10,12 +10,63 @@ const fs = require('fs');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  categories
-    .find({ $where: 'this.is_parent == true' })
-    .populate('children')
-    .exec((err, parent_categories) => {
-      if (err) throw err;
-      res.render('index', { parent_categories: parent_categories });
+  let page_num = req.query.page
+    ? req.query.page
+    : 1;
+  let limitSize = 8;
+  let skipSize = (page_num - 1) * limitSize;
+
+  let posts_load = new Promise((resolve, reject) => {
+    posts
+      .find({})
+      .sort({ date: -1 })
+      .skip(skipSize)
+      .limit(limitSize)
+      .exec((err, posts) => {
+        if (err) reject(err);
+        resolve(posts);
+      });
+  });
+
+  let category_load = new Promise((resolve, reject) => {
+    categories
+      .find({ $where: "this.is_parent == true" })
+      .populate("children")
+      .exec((err, parent_categories) => {
+        if (err) reject(err);
+        resolve(parent_categories);
+      });
+  });
+
+  let posts_count_load = new Promise((resolve, reject) => {
+    posts
+      .countDocuments({}, (err, count) => {
+        if (err) reject(err);
+        resolve(count);
+      });
+  });
+
+  Promise
+    .all([category_load, posts_load, posts_count_load])
+    .then((page_info) => {
+
+      // convert html to plaintext
+      let parsed_posts = page_info[1].map((post) => {
+        return h2p(post.contents);
+      });
+
+      res.render("index", {
+        parent_categories: page_info[0],
+        posts: page_info[1],
+        parsed_posts: parsed_posts,
+        page_num: page_num,
+        total_num: page_info[2],
+        limitSize: limitSize,
+        moment: moment
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
 });
 
@@ -26,6 +77,16 @@ router.get('/about', (req, res) => {
     .exec((err, parent_categories) => {
       if (err) throw err;
       res.render('about', { parent_categories: parent_categories });
+    });
+});
+
+router.get('/guestbook', (req, res) => {
+  categories
+    .find({ $where: 'this.is_parent == true' })
+    .populate('children')
+    .exec((err, parent_categories) => {
+      if (err) throw err;
+      res.render('guestbook', { parent_categories: parent_categories });
     });
 });
 

@@ -88,3 +88,4 @@ There are three types of categories possible.
  ### 19.02.16
  - Subtle design adjustments
  - In post page, title changed to post title
+ - Recent posts are in index page
