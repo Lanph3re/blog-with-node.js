@@ -3,7 +3,7 @@
  * css for post view
  * ----------------------------------
  */
-#main_content {
+ #main_content {
   width: 80%;
   margin: 0.5% auto;
 }
@@ -12,6 +12,7 @@
   width: 100%;
   height: 55px;
   border-bottom: solid 1px rgb(204, 204, 204);
+  margin-top: 25px;
 }
 
 #in_post_title {
@@ -81,6 +82,7 @@ span.tag {
 #in_post_bar {
   width: 100%;
   height: 23px;
+  margin-bottom: 50px;
   padding: 10px 0 10px 0;
 }
 

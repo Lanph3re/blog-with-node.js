@@ -9,6 +9,10 @@ This blog supports
  - Tagging
  - Responsive layout
 
+There are no built-in comments and guest book features.
+
+You can use other comments plugins :)
+
 Willingly appreciate feedbacks about codes and everything about project.
 
 I am a newbie developer and ignorant of copyright issues.
@@ -81,3 +85,6 @@ There are three types of categories possible.
  - Login page design updated
  - Only admin can write, edit, and delete posts
  - Subtle design adjustments
+ ### 19.02.16
+ - Subtle design adjustments
+ - In post page, title changed to post title
