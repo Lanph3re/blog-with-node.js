@@ -58,6 +58,7 @@ router.get('/', (req, res) => {
       res.render("index", {
         parent_categories: page_info[0],
         posts: page_info[1],
+        path: '/',
         parsed_posts: parsed_posts,
         page_num: page_num,
         total_num: page_info[2],
