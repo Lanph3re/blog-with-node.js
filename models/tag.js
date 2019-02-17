@@ -4,6 +4,7 @@ let mongoose = require('mongoose');
 let tagSchema = mongoose.Schema(
   {
     name: String,
+    count: Number
   }
 );
 

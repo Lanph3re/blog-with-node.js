@@ -4,11 +4,11 @@ block CSSs
   link(rel="stylesheet" href="/static/css/jquery-ui.css")
   link(rel="stylesheet", href="/static/bootstrap-3.3.2-dist/css/bootstrap.css")
   link(href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet")
-  link(rel="stylesheet", href="/static/highlight.js/styles/atom-one-dark.css")
+  link(rel="stylesheet", href="/static/highlight/styles/atom-one-dark.css")
   link(rel="stylesheet" href="/static/css/viewPost.css")
 block SCRIPTs
   script(src="/static/js/jquery-ui.js")
-  script(src="/static/highlight.js/highlight.pack.js")
+  script(src="/static/highlight/highlight.pack.js")
   script(src="/static/js/viewPost.js")
   <script>hljs.initHighlightingOnLoad();</script>
 block inHead
@@ -42,7 +42,3 @@ block content
             .in_post_menu 삭제
           a(href="/posts/edit?id="+post._id)
             .in_post_menu 수정
-          
-        
-
-

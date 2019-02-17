@@ -20,6 +20,8 @@ block content
       #post_info
         input#post_id(name="post_id" type="hidden" value=post._id)
         input#post_category_before(name="post_category_before" type="hidden" value=post.category)
+        each tag in post.tags
+          input(name="post_tags_before" type="hidden" value=tag)
         textarea#post_title(
           name="post_title" 
           cols="60"

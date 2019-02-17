@@ -2,7 +2,6 @@ const express = require('express');
 const posts = require('../models/post');
 const categories = require('../models/category');
 const tags = require('../models/tag');
-const pt_matches = require('../models/pt_match');
 const moment = require('moment');
 const h2p = require('html2plaintext');
 const Feed = require('feed');
@@ -57,8 +56,8 @@ router.get('/', (req, res) => {
 
       res.render("index", {
         parent_categories: page_info[0],
-        posts: page_info[1],
         path: '/',
+        posts: page_info[1],
         parsed_posts: parsed_posts,
         page_num: page_num,
         total_num: page_info[2],
@@ -152,32 +151,8 @@ router.get('/tags', (req, res) => {
       });
   });
 
-  let loaded_tag_info = tag_load
-    .then((tags) => {
-      return Promise.all(tags.map((tag) => {
-        return new Promise((resolve) => {
-          pt_matches
-            .find({ tag_id: tag._id })
-            .exec((err, match_entries) => {
-              if (err) reject(err);
-              let pair = {
-                name: tag.name,
-                count: match_entries.length
-              }
-              resolve(pair);
-            });
-        });
-      }));
-    })
-    .then((pairs) => {
-      return pairs;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
   Promise
-    .all([category_load, loaded_tag_info])
+    .all([category_load, tag_load])
     .then((page_info) => {
       res.render('tags', { parent_categories: page_info[0], tags_info: page_info[1] });
     })

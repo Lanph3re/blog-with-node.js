@@ -2,7 +2,6 @@ const express = require("express");
 const posts = require("../models/post");
 const categories = require("../models/category");
 const tags = require("../models/tag");
-const pt_matches = require("../models/pt_match");
 const moment = require("moment");
 const h2p = require('html2plaintext');
 const router = express.Router();
@@ -184,35 +183,25 @@ router.post("/", (req, res) => {
                   (err, fTag) => {
                     if (err) reject(err);
                     if (fTag == null) {
-
                       // codes below executed when input tag doesn't exist in the database
                       let newTag = new tags();
                       newTag.name = item;
+                      newTag.count = 1;
 
                       newTag.save((err, createdTag) => {
                         if (err) reject(err);
-                        let newMatch = new pt_matches();
-
-                        newMatch.post_id = createdPost._id;
-                        newMatch.tag_id = createdTag._id;
-
-                        newMatch.save((err) => {
-                          if (err) reject(err);
-                          resolve();
-                        });
-                      });
-                    } else {
-
-                      //codes below executed when input tag exists in the database
-                      let newMatch = new pt_matches();
-
-                      newMatch.post_id = createdPost._id;
-                      newMatch.tag_id = fTag._id;
-
-                      newMatch.save((err) => {
-                        if (err) throw err;
                         resolve();
                       });
+                    } else {
+                      //codes below executed when input tag exists in the database
+                      tags.findOneAndUpdate(
+                        { name: fTag.name },
+                        { $inc: { count: 1 } },
+                        (err) => {
+                          if (err) reject(err);
+                          resolve();
+                        }
+                      );
                     }
                   })
               });
@@ -230,6 +219,7 @@ router.post("/", (req, res) => {
     } else if (mode == "edit") {
       let id = req.body.post_id;
       let category_before = req.body.post_category_before;
+      let tags_before = req.body.post_tags_before;
       let img_regex = RegExp('<img [^<>]*>');
       let thumbnail = contents.match(img_regex);
 
@@ -260,11 +250,11 @@ router.post("/", (req, res) => {
            * for the ease of coding, all the match entries are deleted in the database
            * after that, both tag data and match entry are inserted in the database
            */
-          pt_matches.deleteMany(
-            { post_id: updatedPost._id },
+          tags.updateMany(
+            { name: { $in: tags_before } },
+            { $inc: { count: -1 } },
             (err) => {
               if (err) throw err;
-
               tagArr.forEach((item) => {
                 // check whether item tag is already in data base
                 tags.findOne(
@@ -278,27 +268,20 @@ router.post("/", (req, res) => {
                       // codes below executed when input tag doesn't exist in the database
                       let newTag = new tags();
                       newTag.name = item;
+                      newTag.count = 1;
 
                       newTag.save((err, createdTag) => {
-                        let newMatch = new pt_matches();
-
-                        newMatch.post_id = updatedPost._id;
-                        newMatch.tag_id = createdTag._id;
-
-                        newMatch.save((err) => {
-                          if (err) throw err;
-                        });
+                        if (err) reject(err);
                       });
                     } else {
                       //codes below executed when input tag exists in the database
-                      let newMatch = new pt_matches();
-
-                      newMatch.post_id = updatedPost._id;
-                      newMatch.tag_id = fTag._id;
-
-                      newMatch.save((err) => {
-                        if (err) throw err;
-                      });
+                      tags.findOneAndUpdate(
+                        { name: fTag.name },
+                        { $inc: { count: 1 } },
+                        (err) => {
+                          if (err) throw err;
+                        }
+                      );
                     } // end else of if(fTag == null)
                   }
                 ); // end tags.findOne()
@@ -411,10 +394,9 @@ router.get("/delete", (req, res) => {
                 { $inc: { count: -1 } },
                 (err) => {
                   if (err) throw err;
-                  pt_matches.deleteMany(
-                    {
-                      post_id: dPost._id
-                    },
+                  tags.updateMany(
+                    { name: { $in: dPost.tags } },
+                    { $inc: { count: -1 } },
                     (err) => {
                       if (err) throw err;
                       // redirect to category the deleted post was in
@@ -427,7 +409,7 @@ router.get("/delete", (req, res) => {
       throw err;
     }
   } else {
-    req.session.returnURL = '/delete?id=' + req.query.id;
+    req.session.returnURL = '/posts/delete?id=' + req.query.id;
     res.redirect('/login');
   }
 });
@@ -445,7 +427,7 @@ router.get("/edit", (req, res) => {
             resolve(parent_categories);
           });
       });
-  
+
       let post_load = new Promise((resolve) => {
         posts.findOne(
           {
@@ -456,7 +438,7 @@ router.get("/edit", (req, res) => {
             resolve(post);
           });
       });
-  
+
       Promise
         .all([category_load, post_load])
         .then((page_info) => {
@@ -469,7 +451,7 @@ router.get("/edit", (req, res) => {
       throw err;
     }
   } else {
-    req.session.returnURL = '/edit?id=' + req.query.id;
+    req.session.returnURL = '/posts/edit?id=' + req.query.id;
     res.redirect('/login');
   }
 });

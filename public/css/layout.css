@@ -236,7 +236,8 @@ a#mobile_search {
   header {
     grid-template-columns: 67px auto 67px;
     padding: 0;
-    background: #ffffff
+    background: #ffffff;
+    border-bottom: 1.5px solid #8e8e8e;
   }
 
   section {
@@ -250,6 +251,7 @@ a#mobile_search {
 
   footer {
     background: #ffffff;
+    border-top: 1.5px solid #8e8e8e;
   }
 
   header a {
@@ -379,6 +381,11 @@ a#mobile_search {
 @media screen and (max-width: 420px) {
   header {
     grid-template-columns: 58px auto 58px;
+    border-bottom: 1px solid #8e8e8e;
+  }
+  
+  footer {
+    border-top: 1px solid #8e8e8e;
   }
   
   a#mobile_menu {

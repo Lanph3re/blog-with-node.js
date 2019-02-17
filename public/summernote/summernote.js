@@ -7396,7 +7396,7 @@
           height: null,
           linkTargetBlank: true,
           focus: false,
-          tabSize: 4,
+          tabSize: 2,
           styleWithSpan: true,
           shortcuts: true,
           textareaAutoSync: true,
